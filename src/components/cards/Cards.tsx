@@ -1,12 +1,29 @@
 import { IonCol, IonGrid, IonRow, IonCard,IonCardContent,IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton } from '@ionic/react';
-import Item from '../../interfaces/ItemInterfaces';
+import { Product } from '../../interfaces/ProductInterfaces';
+
+import { useDispatch } from 'react-redux';
+import { addWishlist, removeWishlist} from '../../store/slices/product.slice';
+
 
 interface CardProps{
-    items: Item[];
-    filter?: string;
+    items: Product[];
+    wishlistItems: Product[];
 }
   
-const Cards: React.FC<CardProps> = ({ items }) => {
+const Cards: React.FC<CardProps> = ({ items, wishlistItems }) => {
+    const dispatch = useDispatch();
+
+    const isWishlist = (id: number) => {
+        return wishlistItems.some(item => item.id === id);
+      };
+    const addWishList = (item:Product) =>{
+        if(isWishlist(item.id)){
+          dispatch(removeWishlist(item.id));
+        }else{
+          dispatch(addWishlist(item));
+        }
+      };
+    
     return (
         <div>
             <IonGrid>
@@ -20,7 +37,11 @@ const Cards: React.FC<CardProps> = ({ items }) => {
                                 <IonCardTitle>{item.title}</IonCardTitle>
                             </IonCardHeader>
                             <IonCardContent></IonCardContent>
-                            <IonButton fill="clear">Add</IonButton>
+                            <IonButton fill="clear"
+                            color={isWishlist(item.id) ? 'danger' : 'primary'}
+                            onClick={() => addWishList(item)}>
+                                {isWishlist(item.id) ? 'REMOVE':'ADD'}
+                            </IonButton>
                         </IonCard>
                     </IonCol>
                     ))}  

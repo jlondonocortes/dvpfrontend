@@ -1,4 +1,4 @@
-interface Item {
+export interface Product {
     id: number;
     title: string;
     price: number;
@@ -7,6 +7,7 @@ interface Item {
     creationAt: string;
     updatedAt: string;
     category: Category;
+    addedAt?: string;  
 }
 
 interface Category {
@@ -17,4 +18,3 @@ interface Category {
     updatedAt: string;
 }
 
-export default Item;
