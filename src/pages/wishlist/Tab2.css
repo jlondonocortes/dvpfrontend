@@ -1,0 +1,10 @@
+.containerOrder{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.containerOrder ion-select {
+    width: auto;
+}

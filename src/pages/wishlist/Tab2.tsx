@@ -1,22 +1,32 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../../components/ExploreContainer';
+import { IonContent, IonHeader, IonPage, IonList,IonItem, IonSelect,IonSelectOption } from '@ionic/react';
 import './Tab2.css';
+import Cards from '../../components/Cards';
+import { useAppSelector } from '../../store';
+import { sortWishlist } from '../../store/slices/product.slice';
 
 const Tab2: React.FC = () => {
+  const wishlistItems = useAppSelector((state) => state.wishlist.items);
+  let order = ''
+  const orderProduct = (e: any) => {
+    let items = sortWishlist(e); console.log(items);
+  }
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
-        </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 2 page" />
+        <div className='containerOrder'>
+          <IonSelect onIonChange={(e) => orderProduct(e.detail.value)} aria-label="Ordenar" placeholder="Ordenar">
+            <IonSelectOption value="name">Nombre</IonSelectOption>
+            <IonSelectOption value="price">Precio</IonSelectOption>
+            <IonSelectOption value="fecha">Fecha</IonSelectOption>
+          </IonSelect>
+        </div>
+        <Cards items={[]} 
+                wishlistItems={wishlistItems} 
+                loading={false} 
+                error={null}
+                order={order}/>
       </IonContent>
     </IonPage>
   );
