@@ -10,7 +10,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { ellipse, heartCircle, listCircle, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/product/Tab1';
 import Tab2 from './pages/wishlist/Tab2';
 
@@ -69,11 +69,11 @@ const App: React.FC = () => (
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             <IonTabButton tab="tab1" href="/tab1">
-              <IonIcon aria-hidden="true" icon={triangle} />
+              <IonIcon aria-hidden="true" icon={listCircle} />
               <IonLabel>Productos</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab2" href="/tab2">
-              <IonIcon aria-hidden="true" icon={ellipse} />
+              <IonIcon aria-hidden="true" icon={heartCircle} />
               <IonLabel>Deseados</IonLabel>
             </IonTabButton>
           </IonTabBar>

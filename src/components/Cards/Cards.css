@@ -1,0 +1,19 @@
+ion-card { height: 100%;}
+ion-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+ion-card ion-card-content{
+    font-size: .8rem !important;
+}
+
+ion-card ion-card-header ion-card-title{
+    font-size: 1rem;
+}
+
+ion-card ion-button{
+    bottom: 0;
+    position: absolute;
+}

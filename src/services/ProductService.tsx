@@ -10,13 +10,28 @@ export const useProducts = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<ApiError | null>(null);
+    const IMG_DEFAULT = "producto-sin-imagen.png";
+
+    const checkImage = (items: Product[]) => {        
+        return items.map(item => {      
+            //if(typeof item.images !== "string") return item;      
+            try{
+                const images = item.images.join(","); 
+                item.images = JSON.parse(`${images}`);
+            }catch(err){ 
+                item.images = [IMG_DEFAULT];
+            }
+           return item; 
+        });          
+    }
 
     useEffect(() => {
         const fetchProducts = async () => {
             try{
                 setLoading(true);
                 const response = await axios.get(API_URL);
-                setProducts(response.data);
+                const result =checkImage(response.data);
+                setProducts(result);
             }catch(err){
                 const apiError: ApiError = {
                     message: err instanceof Error ? err.message : 'Error desconocido',
@@ -30,5 +45,7 @@ export const useProducts = () => {
         fetchProducts();
     }, []);
     return { products, loading, error};
+
 }
+
 

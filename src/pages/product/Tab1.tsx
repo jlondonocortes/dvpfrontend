@@ -1,6 +1,7 @@
 import { IonContent,  IonPage } from '@ionic/react';
 import './Tab1.css';
-import Cards from '../../components/Cards';
+import Products from '../../components/Product/Product';
+import Header from '../../components/Header/Header';
 import { useProducts } from '../../services/ProductService';
 import { useAppSelector } from '../../store';
 
@@ -11,9 +12,10 @@ const Tab1: React.FC = () => {
   
   return (
     <IonPage>
+      <Header title={'Lista de productos'}/>
       <IonContent fullscreen>       
-        <Cards items={products} 
-              wishlistItems={wishlistItems} 
+        <Products products={products} 
+              wishlist={wishlistItems} 
               loading={loading} 
               error={error}/>
       </IonContent>
